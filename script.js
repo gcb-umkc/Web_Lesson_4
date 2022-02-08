@@ -21,7 +21,7 @@ function userInfo(name, avatar, id, url) {
 function showUser(user) {
     //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
     let name = "";
-    if (user["name"] == ""){
+    if (user["name"] == null){
         name = user["login"];
     }
     else{
