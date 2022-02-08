@@ -7,6 +7,7 @@ function getGithubInfo(user) {
     let response = request.response();
     return response;
 }
+
 function showUser(user) {
     //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
 }
