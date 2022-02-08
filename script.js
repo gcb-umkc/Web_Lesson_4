@@ -1,15 +1,19 @@
 function getGithubInfo(user) {
     //1. Create an instance of XMLHttpRequest class and send a GET request using it.
     // The function should finally return the object(it now contains the response!)
-    let URL = "https://api.github.com/";
+    const ROOT = "https://api.github.com/";
+    let URL =  ROOT + "users/" + user;
     let request = new XMLHttpRequest();
-    request.open("GET", URL + "/users" + user)
-    let response = request.response;
-    return response;
+    request.open("GET", URL);
+    request.send();
+    console.log(request.responseText);
+    return request;
 }
-function userInfo(name, avatar, ID, URL){
+function userInfo(name, avatar, id, url){
     this.name = name;
     this.avatar = avatar;
+    this.ID = id;
+    this.URL = url
 }
 
 function showUser(user) {
@@ -28,7 +32,7 @@ $(document).ready(function () {
             username = $(this).val();
             //reset the text typed in the input
             $(this).val("");
-            //get the user's information and store the respsonse
+            //get the user's information and store the response
             response = getGithubInfo(username);
             //if the response is successful show the user's details
             if (response.status == 200) {
