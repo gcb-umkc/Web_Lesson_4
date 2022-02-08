@@ -29,7 +29,7 @@ function showUser(user) {
     }
 
     //Creates a new user struct to store relevant request information
-    let newUser = userInfo(name, user["avatar_url"], user["id"], user["url"]);
+    let newUser = userInfo(name, user["avatar_url"], user["id"], user["html_url"]);
     return newUser;
 }
 
