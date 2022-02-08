@@ -9,7 +9,8 @@ function getGithubInfo(user) {
     console.log(request.responseText);
     return request;
 }
-function userInfo(name, avatar, id, url){
+
+function userInfo(name, avatar, id, url) {
     this.name = name;
     this.avatar = avatar;
     this.ID = id;
@@ -18,6 +19,9 @@ function userInfo(name, avatar, id, url){
 
 function showUser(user) {
     //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
+
+
+
 }
 
 function noSuchUser(username) {
