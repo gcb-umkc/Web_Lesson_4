@@ -4,10 +4,12 @@ function getGithubInfo(user) {
     const ROOT = "https://api.github.com/";
     let URL =  ROOT + "users/" + user;
     let request = new XMLHttpRequest();
-    request.open("GET", URL);
+    request.open("GET", URL, false);
     request.send();
     return request;
 }
+
+
 
 //Struct for storing the user info.
 function userInfo(name, avatar, id, url) {
@@ -19,18 +21,21 @@ function userInfo(name, avatar, id, url) {
 }
 
 function showUser(user) {
-    //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
-    let name = "";
-    if (user["name"] == ""){
-        name = user["login"];
-    }
-    else{
-        name = user["name"];
-    }
+    $('#userid').text(user.id)
+    $('#name').text(user.name)
 
-    //Creates a new user struct to store relevant request information
-    let newUser = userInfo(name, user["avatar_url"], user["id"], user["url"]);
-    return newUser;
+    //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
+    // let name = "";
+    // if (user["name"] == ""){
+    //     name = user["login"];
+    // }
+    // else{
+    //     name = user["name"];
+    // }
+    //
+    // //Creates a new user struct to store relevant request information
+    // let newUser = userInfo(name, user["avatar_url"], user["id"], user["url"]);
+    // return newUser;
 }
 
 function noSuchUser(username) {
@@ -43,13 +48,16 @@ $(document).ready(function () {
         if (e.which == 13) {
             //get what the user enters
             username = $(this).val();
+            console.log(username)
             //reset the text typed in the input
             $(this).val("");
             //get the user's information and store the response
             response = getGithubInfo(username);
             //if the response is successful show the user's details
             if (response.status == 200) {
+                console.log(response.status)
                 showUser(JSON.parse(response.responseText));
+                console.log(showUser(JSON.parse(response.responseText)))
                 //else display suitable message
             } else {
                 noSuchUser(username);
