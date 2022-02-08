@@ -4,9 +4,14 @@ function getGithubInfo(user) {
     let URL = "https://api.github.com/";
     let request = new XMLHttpRequest();
     request.open("GET", URL + "/users" + user)
-    let response = request.response();
+    let response = request.response;
     return response;
 }
+function userInfo(name, avatar, ID, URL){
+    this.name = name;
+    this.avatar = avatar;
+}
+
 function showUser(user) {
     //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
 }
