@@ -12,30 +12,27 @@ function getGithubInfo(user) {
 
 
 //Struct for storing the user info.
-function userInfo(name, avatar, id, url) {
-    this.name = name;
-    this.avatar = avatar;
-    this.ID = id;
-    this.URL = url
+function userInfo(user) {
+    if (user["name"] == null){
+        this.name = user["login"];
+    }
+    else{
+        this.name = user["name"];
+    }
+
+    this.avatar = user["avatar_url"];
+    this.ID = user["id"];
+    this.URL = user["html_url"];
     return this;
 }
 
 function showUser(user) {
+    //Creates a new user struct to store relevant request information
+    let newUser = userInfo(user);
+  
+    //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
     $('#userid').text(user.id)
     $('#name').text(user.name)
-
-    //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
-    // let name = "";
-    // if (user["name"] == ""){
-    //     name = user["login"];
-    // }
-    // else{
-    //     name = user["name"];
-    // }
-    //
-    // //Creates a new user struct to store relevant request information
-    // let newUser = userInfo(name, user["avatar_url"], user["id"], user["url"]);
-    // return newUser;
 }
 
 function noSuchUser(username) {
@@ -44,11 +41,12 @@ function noSuchUser(username) {
 
 $(document).ready(function () {
     $(document).on('keypress', '#username', function (e) {
-        //check if the enter(i.e return) key is pressed
+        //check if enter (i.e return) key is pressed
         if (e.which == 13) {
             //get what the user enters
             username = $(this).val();
             console.log(username)
+            let username = $(this).val();
             //reset the text typed in the input
             $(this).val("");
             //get the user's information and store the response
