@@ -4,10 +4,12 @@ function getGithubInfo(user) {
     const ROOT = "https://api.github.com/";
     let URL =  ROOT + "users/" + user;
     let request = new XMLHttpRequest();
-    request.open("GET", URL);
+    request.open("GET", URL, false);
     request.send();
     return request;
 }
+
+
 
 //Struct for storing the user info.
 function userInfo(user) {
@@ -27,12 +29,10 @@ function userInfo(user) {
 function showUser(user) {
     //Creates a new user struct to store relevant request information
     let newUser = userInfo(user);
-
+  
     //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
-
-
-
-
+    $('#userid').text(user.id)
+    $('#name').text(user.name)
 }
 
 function noSuchUser(username) {
@@ -44,6 +44,8 @@ $(document).ready(function () {
         //check if enter (i.e return) key is pressed
         if (e.which == 13) {
             //get what the user enters
+            username = $(this).val();
+            console.log(username)
             let username = $(this).val();
             //reset the text typed in the input
             $(this).val("");
@@ -51,7 +53,9 @@ $(document).ready(function () {
             response = getGithubInfo(username);
             //if the response is successful show the user's details
             if (response.status == 200) {
+                console.log(response.status)
                 showUser(JSON.parse(response.responseText));
+                console.log(showUser(JSON.parse(response.responseText)))
                 //else display suitable message
             } else {
                 noSuchUser(username);
