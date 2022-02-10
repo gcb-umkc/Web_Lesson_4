@@ -22,12 +22,12 @@ function showUser(user) {
     link = String(user["html_url"]);
 
     //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
-    $('#id').text(id);
+    $('#id').text('ID:' + id);
     $('#name').text(name);
-    $('#avatar').text(avatar);
-    $('#html_url').text(link);
-
-
+    $('#avatar').attr("src", avatar);
+    $('#avatar').show();
+    $('#html_url').text("Link");
+    $('#html_url').attr("href", link);
 }
 
 function noSuchUser(username) {
@@ -35,6 +35,7 @@ function noSuchUser(username) {
 }
 
 $(document).ready(function () {
+    $('#avatar').hide();
     $(document).on('keypress', '#username', function (e) {
         //check if enter (i.e return) key is pressed
         let response;
