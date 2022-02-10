@@ -9,32 +9,25 @@ function getGithubInfo(user) {
     return request;
 }
 
-//Struct for storing the user info.
-function userInfo(user) {
+function showUser(user) {
+    //Creates a new user struct to store relevant request information
     if (user["name"] == null){
         this.name = user["login"];
     }
     else{
         this.name = user["name"];
     }
-
-    this.avatar = user["avatar_url"];
-    this.id = user["id"];
-    this.hurl = user["html_url"];
-    return this;
-}
-
-function showUser(user) {
-    //Creates a new user struct to store relevant request information
-    let newUser = userInfo(user);
+    avatar = user["avatar_url"];
+    id = user["id"];
+    link = String(user["html_url"]);
 
     //2. set the contents of the h2 and the two div elements in the div '#profile' with the user content
-    $('#id').text(newUser.id);
-    $('#name').text(newUser.name);
-    $('#avatar').text(newUser.avatar);
-    console.log(newUser.hurl.innerHTML);
-    $('#html_url').text(newUser.hurl.toString());
-    console.log(newUser.hurl);
+    $('#id').text(id);
+    $('#name').text(name);
+    $('#avatar').text(avatar);
+    $('#html_url').text(link);
+
+
 }
 
 function noSuchUser(username) {
@@ -56,9 +49,7 @@ $(document).ready(function () {
             //if the response is successful show the user's details
             if (response.status == 200) {
                 console.log(response.status);
-                let newUser = userInfo(JSON.parse(response.responseText));
-                console.log(newUser.ID);
-                showUser(newUser);
+                showUser(JSON.parse(response.responseText));
                 //else display suitable message
             } else {
                 noSuchUser(username);
